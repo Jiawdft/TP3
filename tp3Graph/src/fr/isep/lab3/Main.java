@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) {
 
 			GraphV2 test = new GraphV2("graph.txt");
-		//	test.affichageAdj();
+			test.affichageAdj();
 			
-			test.addEdge(1, 2);
+	//		test.addEdge(1, 2);
 	}
 }
