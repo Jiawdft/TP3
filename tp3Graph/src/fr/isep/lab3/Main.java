@@ -1,6 +1,5 @@
 package fr.isep.lab3;
 
-import java.io.IOException;
 
 public class Main {
 
