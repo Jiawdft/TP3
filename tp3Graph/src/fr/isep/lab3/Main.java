@@ -7,7 +7,6 @@ public class Main {
 
 			GraphV2 test = new GraphV2("graph.txt");
 			test.affichageAdj();
-			
-	//		test.addEdge(1, 2);
+
 	}
 }

@@ -94,7 +94,9 @@ public class GraphV2 {
 		String nodesId[] = line.split(" ");
 		int node1Id = Integer.parseInt(nodesId[0]);
 		int node2Id = Integer.parseInt(nodesId[1]);
-//		addEdge(node1Id, node2Id);
+		System.out.println("round : " + (i+1));
+		addEdgeToAdj(node1Id, node2Id);
+		
 		}
 		//Un graph de taille M (size)
 		int M = listLignes.size();
@@ -102,14 +104,57 @@ public class GraphV2 {
 	}
 
 //3)-------------------------------------------------------------------------------	
-	public void addEdge(int u, int v){
-		int []tab = {u,v};
+	public void addEdgeToAdj(int u, int v){
 		
-		for (int i : tab){
+		boolean stop = false;
+		Edge edgeU = new Edge();
+		edgeU.edgeID = v;
+		edgeU.nextEdge = null;
+		if (adj[u-1].firstEdge == null) {
+			adj[u-1].firstEdge = edgeU;
+		}else {
 			
+			Edge edgeTemp = adj[u-1].firstEdge;
+			if (edgeTemp.edgeID == v) {
+				stop = true;
+			}
+			while(edgeTemp.nextEdge != null){
+				if (edgeTemp.edgeID == v) {
+					stop = true;
+					break;
+				}
+				edgeTemp = edgeTemp.nextEdge;
+			}
+			if (stop == false) {
+				edgeTemp.nextEdge = edgeU;
+			}
 		}
-		
+		stop = false;
+		Edge edgeV = new Edge();
+		edgeV.edgeID = u;
+		edgeV.nextEdge = null;
+		if (adj[v-1].firstEdge == null) {
+			adj[v-1].firstEdge = edgeV;
+		}else {
+			
+			Edge edgeTemp = adj[v-1].firstEdge;
+			if (edgeTemp.edgeID == u) {
+				stop = true;
+			}
+			while(edgeTemp.nextEdge != null){
+				if (edgeTemp.edgeID == u) {
+					stop = true;
+					break;
+				}
+				edgeTemp = edgeTemp.nextEdge;
+			}
+			if (stop == false) {
+				edgeTemp.nextEdge = edgeV;
+			}
+		}
+		affichageAdj();
 	}
+	
 	
 //Fin-------------------------------------------------------------------------------
 
