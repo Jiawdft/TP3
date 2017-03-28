@@ -1,17 +1,13 @@
 package fr.isep.lab3;
 
+import java.io.IOException;
 
 public class Main {
 
-	public static void main(String[] args) {
-
-			Graph test = new Graph("graph.txt");
-			test.affichageAdj();
-
+	public static void main(String[] args) throws IOException {
 			
-			Graph toto = new Graph();
-			toto.affichageAdj();
-			toto.neighbors(1);
+		Graph graph = new Graph("karate.txt");
+		graph.affichageAdj();
 			
 
 	}
