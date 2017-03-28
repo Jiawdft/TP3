@@ -23,8 +23,10 @@ public class Graph {
 	}
 	//un tableau de node : adjacency list representation
 	private Node[] adj;
+	
 	// Order N du graph
 	private int N;
+	
 	//Size M du graph
 	private int M;
 	
@@ -76,9 +78,11 @@ public class Graph {
 			
 		//initialisation du graph
 		adj = new Node[N];
+		
 		//convertion HashSet toArray String []
 		String nodesTab[] = nodeshs.toArray(new String[nodeshs.size()]);
 		
+		//Initialisation des nodes
 		for (int i = 0; i < nodesTab.length; i++) {
 			adj[i] = new Node();
 			adj[i].nodeId = Integer.parseInt(nodesTab[i]);
@@ -96,8 +100,8 @@ public class Graph {
 		int node1Id = Integer.parseInt(nodesId[0]);
 		int node2Id = Integer.parseInt(nodesId[1]);
 
+		//Voir 4)
 		addEdgeToAdj(node1Id, node2Id);
-		
 		}
 		//Un graph de taille M (size)
 		int M = listLignes.size();
@@ -108,47 +112,80 @@ public class Graph {
 	public void addEdgeToAdj(int u, int v){
 		
 		//pour le noeud u
+		//Initialisation d'un nouveau element du type Edge avec l'id: u
 		Edge edgeU = new Edge();
 		edgeU.edgeID = v;
 		edgeU.nextEdge = null;
-		if (adj[u-1].firstEdge == null) {
-			adj[u-1].firstEdge = edgeU;
-		}else {
+		//dans le cas ou 1er edge du node est null
+		int nodePositionU = getNodePosition(u);
+		if (adj[nodePositionU].firstEdge == null) {
+			adj[nodePositionU].firstEdge = edgeU;
+		}else { //dans le cas ou le 1er edge du node est non null
+			//initialisation d'un edge temporaire pour stocker les information du 1er edge et des edges suivantes
+			Edge edgeTemp = adj[nodePositionU].firstEdge;
 			
-			Edge edgeTemp = adj[u-1].firstEdge;
-			
+			//Cibler le dernier edge
 			while(edgeTemp.nextEdge != null){
 				edgeTemp = edgeTemp.nextEdge;
 			}
-
-			edgeTemp.nextEdge = edgeU;
-	
+			//la fonction presence permet de verifier si v est deja voisin de u
+			boolean presence = presence(u, v);
+			if (presence == false) {
+				edgeTemp.nextEdge = edgeU;
+			}
 		}
 		
 		//pour le noeud v
+		//Initialisation d'un nouveau element du type Edge avec l'id: v
 		Edge edgeV = new Edge();
 		edgeV.edgeID = u;
 		edgeV.nextEdge = null;
-		if (adj[v-1].firstEdge == null) {
-			adj[v-1].firstEdge = edgeV;
-		}else {
-			
-			Edge edgeTemp = adj[v-1].firstEdge;
-			
+		//dans le cas ou 1er edge du node est null
+		int nodePositionV = getNodePosition(v);
+		if (adj[nodePositionV].firstEdge == null) {
+			adj[nodePositionV].firstEdge = edgeV;
+		}else {//dans le cas ou le 1er edge du node est non null
+			//initialisation d'un edge temporaire pour stocker les information du 1er edge et des edges suivantes
+			Edge edgeTemp = adj[nodePositionV].firstEdge;
+			//Cibler le dernier edge
 			while(edgeTemp.nextEdge != null){
 				edgeTemp = edgeTemp.nextEdge;
 			}
-
-			edgeTemp.nextEdge = edgeV;
-
+			//la fonction presence permet de verifier si u est deja voisin de v
+			boolean presence = presence(v, u);
+			if (presence == false) {
+				edgeTemp.nextEdge = edgeV;
+			}	
 		}
-
+	}
+	
+	public boolean presence(int v, int recherche){
+		boolean presence = false;
+		int nodePosition = getNodePosition(v);
+		Edge edgeTemp = adj[nodePosition].firstEdge;
+		while(edgeTemp != null){
+			if (edgeTemp.edgeID == recherche) {
+				presence = true;
+			}
+			edgeTemp = edgeTemp.nextEdge;
+		}
+		return presence;
+	}
+	
+	private int getNodePosition(int nodeId) {
+		for (int i = 0; i < adj.length; i++) {
+			if (adj[i].nodeId == nodeId) {
+				return i;
+			}
+		}
+		return -1;
 	}
 	
 	//5)-------------------------------------------------------------------------------	
 	public void neighbors(int v){
 		System.out.print("Pour le vertex " + v + " les voisins sont : ");
-		Edge edgeTemp = adj[v-1].firstEdge;
+		int nodePosition = getNodePosition(v);
+		Edge edgeTemp = adj[nodePosition].firstEdge;
 		while(edgeTemp != null){
 			System.out.print(edgeTemp.edgeID + ", ");
 			edgeTemp = edgeTemp.nextEdge;
@@ -173,6 +210,48 @@ public class Graph {
 			}
 			System.out.println();
 		}
+	}
+	//-------------------------------------------------------------------------------
+	public int degree(int v){
+		int compteur = 0;
+		int nodePosition = getNodePosition(v);
+		Edge edgeTemp = adj[nodePosition].firstEdge;
+		while(edgeTemp != null){
+			compteur++;
+			edgeTemp = edgeTemp.nextEdge;
+		}
+		return compteur;
+	}
+	
+	public int averageDegree(){
+		int averageDegree = 2 * M / N;
+		return averageDegree;
+	}
+	
+	public int minimumDegree(){
+		int minDegree = Integer.MAX_VALUE;
+		for (Node node: adj) {
+			int degreeTemp = degree(node.nodeId);
+			if (degreeTemp < minDegree) {
+				minDegree = degreeTemp;
+			}
+		}
+		return minDegree;
+	}
+	
+	public int maximumDegree(){
+		int maxDegree = 0;
+		for (Node node: adj) {
+			int degreeTemp = degree(node.nodeId);
+			if (degreeTemp > maxDegree) {
+				maxDegree = degreeTemp;
+			}
+		}
+		return maxDegree;
+	}
+	
+	public double density(){
+		return 2.0 * M / (N * N);
 	}
 	
 	//-------------------------------------------------------------------------------
