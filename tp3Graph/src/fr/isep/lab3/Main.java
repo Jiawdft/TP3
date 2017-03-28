@@ -7,6 +7,7 @@ public class Main {
 
 			GraphV2 test = new GraphV2("graph.txt");
 			test.affichageAdj();
+			test.neighbors(1);
 
 	}
 }

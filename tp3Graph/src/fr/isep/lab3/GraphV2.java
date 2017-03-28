@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 
 public class GraphV2 {
 	
@@ -94,7 +95,7 @@ public class GraphV2 {
 		String nodesId[] = line.split(" ");
 		int node1Id = Integer.parseInt(nodesId[0]);
 		int node2Id = Integer.parseInt(nodesId[1]);
-		System.out.println("round : " + (i+1));
+
 		addEdgeToAdj(node1Id, node2Id);
 		
 		}
@@ -103,10 +104,10 @@ public class GraphV2 {
 		return M;
 	}
 
-//3)-------------------------------------------------------------------------------	
+	//4)-------------------------------------------------------------------------------	
 	public void addEdgeToAdj(int u, int v){
 		
-		boolean stop = false;
+		//pour le noeud u
 		Edge edgeU = new Edge();
 		edgeU.edgeID = v;
 		edgeU.nextEdge = null;
@@ -115,21 +116,16 @@ public class GraphV2 {
 		}else {
 			
 			Edge edgeTemp = adj[u-1].firstEdge;
-			if (edgeTemp.edgeID == v) {
-				stop = true;
-			}
+			
 			while(edgeTemp.nextEdge != null){
-				if (edgeTemp.edgeID == v) {
-					stop = true;
-					break;
-				}
 				edgeTemp = edgeTemp.nextEdge;
 			}
-			if (stop == false) {
-				edgeTemp.nextEdge = edgeU;
-			}
+
+			edgeTemp.nextEdge = edgeU;
+	
 		}
-		stop = false;
+		
+		//pour le noeud v
 		Edge edgeV = new Edge();
 		edgeV.edgeID = u;
 		edgeV.nextEdge = null;
@@ -138,25 +134,31 @@ public class GraphV2 {
 		}else {
 			
 			Edge edgeTemp = adj[v-1].firstEdge;
-			if (edgeTemp.edgeID == u) {
-				stop = true;
-			}
+			
 			while(edgeTemp.nextEdge != null){
-				if (edgeTemp.edgeID == u) {
-					stop = true;
-					break;
-				}
 				edgeTemp = edgeTemp.nextEdge;
 			}
-			if (stop == false) {
-				edgeTemp.nextEdge = edgeV;
-			}
+
+			edgeTemp.nextEdge = edgeV;
+
 		}
-		affichageAdj();
+
+	}
+	
+	//5)-------------------------------------------------------------------------------	
+	public void neighbors(int v){
+		System.out.print("Pour le vertex " + v + "les voisins sont :");
+		Edge edgeTemp = adj[v-1].firstEdge;
+		while(edgeTemp != null){
+			System.out.print(edgeTemp.edgeID + ", ");
+			edgeTemp = edgeTemp.nextEdge;
+		}
+		System.out.println();
 	}
 	
 	
-//Fin-------------------------------------------------------------------------------
+	
+	//6)-------------------------------------------------------------------------------
 
 	public void affichageAdj(){
 		System.out.println("Order : " + N);
@@ -172,4 +174,18 @@ public class GraphV2 {
 			System.out.println();
 		}
 	}
+	
+	//-------------------------------------------------------------------------------
+	public GraphV2(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter the number of vertices:");
+		int N = scan.nextInt();
+		GraphV2 graph = new GraphV2(N);
+		System.out.println("Enter the number of edges:");
+		int M = scan.nextInt();
+		System.out.println("Enter the edges in the graph : <to> <from>");
+		
+	}
+	
+	
 }
