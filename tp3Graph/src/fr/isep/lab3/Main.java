@@ -5,9 +5,14 @@ public class Main {
 
 	public static void main(String[] args) {
 
-			GraphV2 test = new GraphV2("graph.txt");
+			Graph test = new Graph("graph.txt");
 			test.affichageAdj();
-			test.neighbors(1);
+
+			
+			Graph toto = new Graph();
+			toto.affichageAdj();
+			toto.neighbors(1);
+			
 
 	}
 }

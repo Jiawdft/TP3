@@ -1,110 +1,205 @@
 package fr.isep.lab3;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 
 public class Graph {
-	private final int N;
+	
+//1)-------------------------------------------------------------------------------	
+	//une class Node avec un identifiant et un element Edge
+	private class Node{
+		int nodeId;
+		Edge firstEdge;
+	}
+	//une class Edge avec un identifiant du node voisin et l'element Edge suivant 
+	private class Edge{
+		int edgeID;
+		Edge nextEdge;
+	}
+	//un tableau de node : adjacency list representation
+	private Node[] adj;
+	// Order N du graph
+	private int N;
+	//Size M du graph
 	private int M;
-	private List<Integer> adj[];
 	
+	//Initialisation : graph vide d'ordre N
+	public Graph(int N){
+		this.N = N ;
+		this.M = 0;
+		
+		//initialisation tableau de taille N
+		adj = new Node[N];
+		for (int i = 0; i < adj.length; i++) {
+			adj[i] = new Node();
+			adj[i].nodeId = i + 1;
+			adj[i].firstEdge = null;
+		}
+	}
+
 	
+	//2 & 3)-------------------------------------------------------------------------------		
+	//Initialisation graph : a partir de graph.txt
+	public Graph(String filePath){
+		try {
+			List<String> listLignes = Files.readAllLines(Paths.get(filePath),
+					StandardCharsets.UTF_8);
+			N = addNodesFromTxt(listLignes);
+			M = addEdgesFromTxt(listLignes);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
-	public int getM() {
+	public int addNodesFromTxt(List<String> listLignes){
+		//un node est parfois present dans plusieurs edges,
+		//on utilise HashSet car c'est une collection qui n'accepte pas les doublons
+		//Dans nodeshs on va stocker les nodes du graph
+		HashSet<String> nodeshs = new HashSet<String>();
+		
+		//on parcourt tous les edges du "graph.txt"
+		for (int i = 0; i < listLignes.size(); i++) {
+			String line = listLignes.get(i);
+			//pour chaque edge, on recupere les identifiants des nodes
+			String nodesId[] = line.split(" ");
+			nodeshs.add(nodesId[0]);
+			nodeshs.add(nodesId[1]);
+		}
+		//Un graph d'ordre N (order)
+		int N = nodeshs.size();
+			
+		//initialisation du graph
+		adj = new Node[N];
+		//convertion HashSet toArray String []
+		String nodesTab[] = nodeshs.toArray(new String[nodeshs.size()]);
+		
+		for (int i = 0; i < nodesTab.length; i++) {
+			adj[i] = new Node();
+			adj[i].nodeId = Integer.parseInt(nodesTab[i]);
+			adj[i].firstEdge = null;
+		}
+		return N;
+	}
+	
+	public int addEdgesFromTxt(List<String> listLignes){
+		//on parcourt tous les edges du "graph.txt"
+		for (int i = 0; i < listLignes.size(); i++) {
+		String line = listLignes.get(i);
+		//pour chaque edge, on recupere les identifiants des nodes
+		String nodesId[] = line.split(" ");
+		int node1Id = Integer.parseInt(nodesId[0]);
+		int node2Id = Integer.parseInt(nodesId[1]);
+
+		addEdgeToAdj(node1Id, node2Id);
+		
+		}
+		//Un graph de taille M (size)
+		int M = listLignes.size();
 		return M;
 	}
 
-	public void setM(int m) {
-		M = m;
-	}
-
-	public List<Integer>[] getAdj() {
-		return adj;
-	}
-
-	public void setAdj(List<Integer>[] adj) {
-		this.adj = adj;
-	}
-
-	public int getN() {
-		return N;
-	}
-
-	public Graph(int n, int m, List<Integer>[] adj) {
-		super();
-		N = n;
-		M = m;
-		this.adj = adj;
-	}
-	
-	public Graph emptyGraph(int n){
-		List<Integer> adj[] = new List[n];
-		Graph emptyGraph = new Graph(n, 0, adj);
-		return emptyGraph;
-	}
-	
-	public static Graph txtGraph(String fichier){
-		int n = 0;
-		int m = 0;
-		ArrayList<String> arcs = new ArrayList();
-		ArrayList<String> adjArray = new ArrayList();
+	//4)-------------------------------------------------------------------------------	
+	public void addEdgeToAdj(int u, int v){
 		
-		
-		try{
-			InputStream ips=new FileInputStream(fichier); 
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
-			String ligne;
-			while ((ligne=br.readLine())!=null){
-				System.out.println(ligne);
-				arcs.add(ligne);
-				
-				int node1 = Integer.parseInt(ligne.substring(0,1));
-				int node2 = Integer.parseInt(ligne.substring(2,3));
-				
-				
-				
-				
-				m++;
+		//pour le noeud u
+		Edge edgeU = new Edge();
+		edgeU.edgeID = v;
+		edgeU.nextEdge = null;
+		if (adj[u-1].firstEdge == null) {
+			adj[u-1].firstEdge = edgeU;
+		}else {
+			
+			Edge edgeTemp = adj[u-1].firstEdge;
+			
+			while(edgeTemp.nextEdge != null){
+				edgeTemp = edgeTemp.nextEdge;
 			}
-			br.close(); 
-		}		
-		catch (Exception e){
-			System.out.println(e.toString());
+
+			edgeTemp.nextEdge = edgeU;
+	
+		}
+		
+		//pour le noeud v
+		Edge edgeV = new Edge();
+		edgeV.edgeID = u;
+		edgeV.nextEdge = null;
+		if (adj[v-1].firstEdge == null) {
+			adj[v-1].firstEdge = edgeV;
+		}else {
+			
+			Edge edgeTemp = adj[v-1].firstEdge;
+			
+			while(edgeTemp.nextEdge != null){
+				edgeTemp = edgeTemp.nextEdge;
+			}
+
+			edgeTemp.nextEdge = edgeV;
+
 		}
 
-		
-		List<Integer> adjGraph[] = new List[m];
-		
-		Graph graph = new Graph(n, m, adjGraph);
-		return graph;
 	}
 	
-	public static int getOrder(Graph graph){
-		int order = graph.getN();
-		return order;
-	}
-	
-	public static int getSize(Graph graph){
-		int size = graph.getM();
-		return size;
-	}
-	
-	public void addEdge(int u, int v){
-		M++;
-		
-		if (adj[u].contains(v) == false) {
-			adj[u].add(v);
+	//5)-------------------------------------------------------------------------------	
+	public void neighbors(int v){
+		System.out.print("Pour le vertex " + v + " les voisins sont : ");
+		Edge edgeTemp = adj[v-1].firstEdge;
+		while(edgeTemp != null){
+			System.out.print(edgeTemp.edgeID + ", ");
+			edgeTemp = edgeTemp.nextEdge;
 		}
-		if (adj[v].contains(u) == false) {
-			adj[v].add(u);
+		System.out.println();
+	}
+	
+	
+	
+	//6)-------------------------------------------------------------------------------
+
+	public void affichageAdj(){
+		System.out.println("Order : " + N);
+		System.out.println("Size : " + M);
+		System.out.println("Adjacency list :");
+		for (int i = 0; i < adj.length; i++) {
+			System.out.print(adj[i].nodeId + ": ");
+			Edge edge = adj[i].firstEdge;
+			while (edge != null) {
+				System.out.print(edge.edgeID + ", ");
+				edge = edge.nextEdge;
+			}
+			System.out.println();
 		}
-		
+	}
+	
+	//-------------------------------------------------------------------------------
+	public Graph(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter the number of vertices:");
+		N = scan.nextInt();
+		adj = new Node[N];
+		for (int i = 0; i < adj.length; i++) {
+			adj[i] = new Node();
+			adj[i].nodeId = i + 1;
+			adj[i].firstEdge = null;
+		}
+		System.out.println("Enter the number of edges:");
+		M = scan.nextInt();
+		scan.nextLine();
+				
+		for (int i = 0; i < M; i++) {
+			System.out.println("Enter the edges in the graph : <to> <from>");
+			String ligne = scan.nextLine();
+			String [] nodes = ligne.split(" ");
+			int node1 = Integer.parseInt(nodes[0]);
+			int node2 = Integer.parseInt(nodes[1]);
+			addEdgeToAdj(node1, node2);
+			
+		}
+		scan.close();
 	}
 	
 	
