@@ -147,7 +147,7 @@ public class GraphV2 {
 	
 	//5)-------------------------------------------------------------------------------	
 	public void neighbors(int v){
-		System.out.print("Pour le vertex " + v + "les voisins sont :");
+		System.out.print("Pour le vertex " + v + " les voisins sont : ");
 		Edge edgeTemp = adj[v-1].firstEdge;
 		while(edgeTemp != null){
 			System.out.print(edgeTemp.edgeID + ", ");
