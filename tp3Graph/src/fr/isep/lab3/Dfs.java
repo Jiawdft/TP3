@@ -46,17 +46,26 @@ public class Dfs {
 
 	}
 	
+	//Creation stack des voisins d'un noeud en ordre decroissant 
 	public Stack<Integer> stackVoisin(Node node){
+		//Initialisation d'une ArrayList vide
 		ArrayList<Integer> listVoisin = new ArrayList<Integer>();
+		//Initialisation d'un Stack vide
 		Stack<Integer> stack = new Stack<Integer>();
-		Edge edge = node.firstEdge;
+		//Initialisation de la boucle avec le 1er edge du noeud
+		Edge edge = node.firstEdge; 
+		//Ajouter les voisins du noeud dans la list
 		while (edge != null) {
+			//ajout dans array list
 			listVoisin.add(edge.edgeID);
+			//next edge
 			edge = edge.nextEdge;
 		}
-		
+		//Trier la list, ordre croissant
 		Collections.sort(listVoisin);
+		//Trier en ordre decroissant 
 		Collections.reverse(listVoisin);
+		//Remplissage du stack du plus grand valeur au plus petit
 		for (int valeur : listVoisin) {
 			stack.push(valeur);
 		}
