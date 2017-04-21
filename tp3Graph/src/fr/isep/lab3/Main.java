@@ -5,7 +5,9 @@ import java.io.IOException;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		Graph graph = new Graph("graph.txt");
+		
+		/*
+		Graph graph = new Graph("graph-DFS-BFS.txt");
 		graph.affichageAdj();
 		
 		System.out.println("Average degree : " + graph.averageDegree());
@@ -17,6 +19,11 @@ public class Main {
 		graph.neighbors(2);
 		graph.neighbors(3);
 		graph.neighbors(4);
+		*/
+		
+		Graph graph = new Graph("graph-DFS-BFS.txt");
+		Dfs toto = new Dfs();
+		toto.dfs(graph);
 		
 	}
 }

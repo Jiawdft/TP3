@@ -12,12 +12,12 @@ public class Graph {
 	
 //1)-------------------------------------------------------------------------------	
 	//une class Node avec un identifiant et un element Edge
-	private class Node{
+	public class Node{
 		int nodeId;
 		Edge firstEdge;
 	}
 	//une class Edge avec un identifiant du node voisin et l'element Edge suivant 
-	private class Edge{
+	public class Edge{
 		int edgeID;
 		Edge nextEdge;
 	}
@@ -30,6 +30,12 @@ public class Graph {
 	//Size M du graph
 	private int M;
 	
+	
+	public Node[] getAdj() {
+		return adj;
+	}
+
+
 	//Initialisation : graph vide d'ordre N
 	public Graph(int N){
 		this.N = N ;
@@ -128,11 +134,14 @@ public class Graph {
 			while(edgeTemp.nextEdge != null){
 				edgeTemp = edgeTemp.nextEdge;
 			}
+			edgeTemp.nextEdge = edgeU;
+			/*
 			//la fonction presence permet de verifier si v est deja voisin de u
 			boolean presence = presence(u, v);
 			if (presence == false) {
 				edgeTemp.nextEdge = edgeU;
 			}
+			*/
 		}
 		
 		//pour le noeud v
@@ -151,11 +160,14 @@ public class Graph {
 			while(edgeTemp.nextEdge != null){
 				edgeTemp = edgeTemp.nextEdge;
 			}
+			edgeTemp.nextEdge = edgeV;
+			/*
 			//la fonction presence permet de verifier si u est deja voisin de v
 			boolean presence = presence(v, u);
 			if (presence == false) {
 				edgeTemp.nextEdge = edgeV;
 			}	
+			*/
 		}
 	}
 	
@@ -280,6 +292,7 @@ public class Graph {
 		}
 		scan.close();
 	}
+	
 	
 	
 }
