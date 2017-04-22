@@ -1,12 +1,10 @@
 package fr.isep.lab3;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
-
 import fr.isep.lab3.Graph.Edge;
 import fr.isep.lab3.Graph.Node;
 
@@ -18,7 +16,7 @@ public class Dfs {
 		Set<Integer> visited = new HashSet<Integer>();
 	
 		//Stack pour la recherche DFS
-		Stack<Integer> stack = new Stack();
+		Stack<Integer> stack = new Stack<Integer>();
 		
 		//ajout de la permiere valeur dans visited et le stack
 		Node[] adj = G.getAdj();
@@ -27,7 +25,7 @@ public class Dfs {
 		
 		while(!stack.empty()){
 			int stackLastElem = stack.peek();
-			Stack stackVoisin = stackVoisin(adj[stackLastElem]);
+			Stack<Integer> stackVoisin = stackVoisin(adj[stackLastElem]);
 			for (int i = 0; i < stackVoisin.size(); i++) 
 			{
 				if (!visited.contains(stackVoisin.peek())) 
@@ -40,7 +38,7 @@ public class Dfs {
 				{
 					stackVoisin.pop();
 				}
-				//3e possibilité quand les voisins sont tous visited 
+				//3e possibilite quand les voisins sont tous visited 
 			}
 		}
 
