@@ -9,13 +9,18 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		
 		Graph graph = new Graph("graph-DFS-BFS.txt");
-		Dfs run = new Dfs();
-		ArrayList<Integer> list = run.dfs(graph, 5);
-		System.out.println("the order of the first encounter of the node 5 : " + list);
-		int nombreComponent = run.cc(graph);
+		Dfs rundfs = new Dfs();
+		ArrayList<Integer> listdfs = rundfs.dfs(graph, 5);
+		System.out.println("the order of the first encounter of the node 5 by dfs : " + listdfs);
+		int nombreComponent = rundfs.cc(graph);
 		System.out.println("The graph have : " + nombreComponent + " components");
-		boolean isConnected = run.isConnected(graph);
+		boolean isConnected = rundfs.isConnected(graph);
 		System.out.println("Connected graph : " + isConnected);
+		
+		Bfs runbfs = new Bfs();
+		ArrayList<Integer> listbfs = runbfs.bfs(graph, 5);
+		System.out.println("the order of the first encounter of the node 5 by bfs : " + listbfs);
+
 		
 		/*
 		Graph graph = new Graph("graph-DFS-BFS.txt");
