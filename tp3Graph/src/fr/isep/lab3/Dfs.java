@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
-
 import fr.isep.lab3.Graph.Edge;
 import fr.isep.lab3.Graph.Node;
 
@@ -27,8 +26,24 @@ public class Dfs {
 		while(!stack.empty()){
 			int stackLastElem = stack.peek();
 			Stack<Integer> stackVoisin = stackVoisin(adj[stackLastElem]);
+<<<<<<< HEAD
 			while (!stackVoisin.empty()) {
 				
+=======
+			for (int i = 0; i < stackVoisin.size(); i++) 
+			{
+				if (!visited.contains(stackVoisin.peek())) 
+				{
+					visited.add((Integer) stackVoisin.peek());
+					stack.push((Integer) stackVoisin.peek());
+					break;
+				}
+				else
+				{
+					stackVoisin.pop();
+				}
+				//3e possibilite quand les voisins sont tous visited 
+>>>>>>> origin/master
 			}
 		}
 
