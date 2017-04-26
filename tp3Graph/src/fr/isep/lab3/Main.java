@@ -8,6 +8,15 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
+		Graph graph = new Graph("graph-DFS-BFS.txt");
+		Dfs run = new Dfs();
+		ArrayList<Integer> list = run.dfs(graph, 5);
+		System.out.println("the order of the first encounter of the node 5 : " + list);
+		int nombreComponent = run.cc(graph);
+		System.out.println("The graph have : " + nombreComponent + " components");
+		boolean isConnected = run.isConnected(graph);
+		System.out.println("Connected graph : " + isConnected);
+		
 		/*
 		Graph graph = new Graph("graph-DFS-BFS.txt");
 		graph.affichageAdj();
@@ -23,16 +32,6 @@ public class Main {
 		graph.neighbors(4);
 		*/
 		
-		Graph graph = new Graph("test.txt");
-//		graph.affichageAdj();
-
-		Dfs toto = new Dfs();
-		ArrayList<Integer> test = toto.dfs(graph, 5);
-//		System.out.println(test);
-		
-	
-		int taille = toto.cc(graph);
-		System.out.println(taille);
 		
 	}
 }
