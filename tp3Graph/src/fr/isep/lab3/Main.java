@@ -23,7 +23,7 @@ public class Main {
 		
 		Graph graph = new Graph("graph-DFS-BFS.txt");
 		Dfs toto = new Dfs();
-		toto.dfs(graph);
+		toto.dfs(graph, 0);
 		
 	}
 }
