@@ -85,5 +85,16 @@ public class Dfs {
 		}
 		return componentList.size();
 	}
+	
+	public boolean isConnected(Graph G){
+		int nombreDeComponent = cc(G);
+		if (nombreDeComponent == 1) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 }

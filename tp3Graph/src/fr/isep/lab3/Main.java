@@ -25,14 +25,14 @@ public class Main {
 		
 		Graph graph = new Graph("test.txt");
 //		graph.affichageAdj();
-		System.out.println();
+
 		Dfs toto = new Dfs();
 		ArrayList<Integer> test = toto.dfs(graph, 5);
 //		System.out.println(test);
 		
 	
-		toto.cc(graph);
-		
+		int taille = toto.cc(graph);
+		System.out.println(taille);
 		
 	}
 }
