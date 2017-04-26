@@ -22,9 +22,6 @@ public class Dfs {
 		visited.add(adj[startingPosition].nodeId);
 		stack.push(adj[startingPosition].nodeId);
 		
-
-
-		
 		while(!stack.empty()){
 			int stackLastElemPosition = G.getNodePosition(stack.peek());
 			Stack<Integer> stackVoisin = stackVoisin(adj[stackLastElemPosition]);
@@ -72,6 +69,21 @@ public class Dfs {
 			stack.push(valeur);
 		}
 		return stack;
+	}
+	
+	
+	public int cc(Graph G){
+		ArrayList<Integer> visited = new ArrayList<Integer>();
+		ArrayList<ArrayList<Integer>> componentList = new ArrayList<ArrayList<Integer>>();
+		Node[] adj = G.getAdj();
+		for (int i = 0; i < adj.length; i++) {
+			if (!visited.contains(adj[i].nodeId)) {
+				ArrayList<Integer> component = dfs(G, adj[i].nodeId);
+				componentList.add(component);
+				visited.addAll(component);
+			}
+		}
+		return componentList.size();
 	}
 
 }

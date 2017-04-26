@@ -23,12 +23,15 @@ public class Main {
 		graph.neighbors(4);
 		*/
 		
-		Graph graph = new Graph("graph-DFS-BFS.txt");
-		graph.affichageAdj();
+		Graph graph = new Graph("test.txt");
+//		graph.affichageAdj();
 		System.out.println();
 		Dfs toto = new Dfs();
 		ArrayList<Integer> test = toto.dfs(graph, 5);
-		System.out.println(test);
+//		System.out.println(test);
+		
+	
+		toto.cc(graph);
 		
 		
 	}
