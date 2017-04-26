@@ -1,6 +1,8 @@
 package fr.isep.lab3;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 
 public class Main {
 
@@ -22,8 +24,12 @@ public class Main {
 		*/
 		
 		Graph graph = new Graph("graph-DFS-BFS.txt");
+		graph.affichageAdj();
+		System.out.println();
 		Dfs toto = new Dfs();
-		toto.dfs(graph, 0);
+		ArrayList<Integer> test = toto.dfs(graph, 5);
+		System.out.println(test);
+		
 		
 	}
 }

@@ -2,37 +2,49 @@ package fr.isep.lab3;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Stack;
 import fr.isep.lab3.Graph.Edge;
 import fr.isep.lab3.Graph.Node;
 
 public class Dfs {
 	
-	public void dfs(Graph G, int startingNode){
+	public ArrayList<Integer> dfs(Graph G, int startingNode){
 		
-		//Un set contenant les identifiants des noeuds visités dans l'ordre 
-		Set<Integer> visited = new HashSet<Integer>();
+		//Un ArrayList contenant les identifiants des noeuds visités dans l'ordre 
+		ArrayList<Integer> visited = new ArrayList<Integer>();
 	
 		//Stack pour la recherche DFS
 		Stack<Integer> stack = new Stack<Integer>();
 		
 		//ajout de la permiere valeur dans visited et le stack
 		Node[] adj = G.getAdj();
-		visited.add(adj[0].nodeId);
-		stack.push(adj[0].nodeId);
+		int startingPosition = G.getNodePosition(startingNode);
+		visited.add(adj[startingPosition].nodeId);
+		stack.push(adj[startingPosition].nodeId);
+		
+
+
 		
 		while(!stack.empty()){
-			int stackLastElem = stack.peek();
-			Stack<Integer> stackVoisin = stackVoisin(adj[stackLastElem]);
+			int stackLastElemPosition = G.getNodePosition(stack.peek());
+			Stack<Integer> stackVoisin = stackVoisin(adj[stackLastElemPosition]);
 
 			while (!stackVoisin.empty()) {
-				
+				if (!visited.contains(stackVoisin.peek())) {
+					visited.add(stackVoisin.peek());
+					stack.push(stackVoisin.peek());
+					break;
+				}
+				else
+				{
+					stackVoisin.pop();
+				}
 			}
-				
-
+			if (stackVoisin.empty()) {
+				stack.pop();
+			}
 		}
+		return visited;
 
 	}
 	

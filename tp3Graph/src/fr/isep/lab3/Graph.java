@@ -184,7 +184,7 @@ public class Graph {
 		return presence;
 	}
 	
-	private int getNodePosition(int nodeId) {
+	public int getNodePosition(int nodeId) {
 		for (int i = 0; i < adj.length; i++) {
 			if (adj[i].nodeId == nodeId) {
 				return i;
