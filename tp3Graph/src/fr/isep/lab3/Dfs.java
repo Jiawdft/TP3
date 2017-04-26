@@ -26,25 +26,12 @@ public class Dfs {
 		while(!stack.empty()){
 			int stackLastElem = stack.peek();
 			Stack<Integer> stackVoisin = stackVoisin(adj[stackLastElem]);
-<<<<<<< HEAD
+
 			while (!stackVoisin.empty()) {
 				
-=======
-			for (int i = 0; i < stackVoisin.size(); i++) 
-			{
-				if (!visited.contains(stackVoisin.peek())) 
-				{
-					visited.add((Integer) stackVoisin.peek());
-					stack.push((Integer) stackVoisin.peek());
-					break;
-				}
-				else
-				{
-					stackVoisin.pop();
-				}
-				//3e possibilite quand les voisins sont tous visited 
->>>>>>> origin/master
 			}
+				
+
 		}
 
 	}
