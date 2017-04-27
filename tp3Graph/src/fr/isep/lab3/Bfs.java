@@ -9,25 +9,36 @@ import fr.isep.lab3.Graph.Edge;
 import fr.isep.lab3.Graph.Node;
 
 public class Bfs {
+	
 	public ArrayList<Integer> bfs(Graph G, int startingNode){
+		//initialisation d'une liste pour stocker les noeuds visited
 		ArrayList<Integer> visited = new ArrayList<Integer>();
+		//initialisation de queue
 		Queue<Integer> queue = new LinkedList<>(); 
 		 Node [] adj = G.getAdj();
+		 //chercher la position du noeud de depart dans le tableau adj
 		int startingNodePosition = G.getNodePosition(startingNode);
+		//ajouter le noeud de depart dans la liste des visited et dans queue
 		visited.add(adj[startingNodePosition].nodeId);
 		queue.add(startingNode);
-		
+		//tant que queue est non vide
 		while (!queue.isEmpty()) {
+			//on prend le dernier element de queue et on cherche ses voisins
 			int queueLastElemPosition = G.getNodePosition(queue.peek());
 			ArrayList<Integer> listVoisin = listVoisin(adj[queueLastElemPosition]);
+			//pour chaque voisins trouves
 			for(int valeur : listVoisin)
 			{
+				//on regarde s'ils sont visited
 				if (!visited.contains(valeur)) 
 				{
+					//s'ils ne sont pas visited, on l'ajout dans la liste visited et
+					//on l'ajout dans queue sinon on passe au voisin suivant
 					visited.add(valeur);
 					queue.add(valeur);
 				}
 			}
+			//on enleve un element de queue
 			queue.remove();
 		}
 		return visited;

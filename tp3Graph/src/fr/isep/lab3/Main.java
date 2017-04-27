@@ -26,6 +26,8 @@ public class Main {
 		Digraph digraph = new Digraph("graph-BFS-SP.txt");
 		digraph.affichageAdj();
 		ArrayList<Integer> excentricityList = new ArrayList<Integer>();
+		//pour chaque noeuds on realise une bfs, on affiche le shortest path vers tous les autres noeuds
+		//et on cherche son excentricity
 		for (int i = 0; i < digraph.getAdj().length; i++) {
 			System.out.println("Strating Node : " + digraph.getAdj()[i].nodeId);
 			runBfsShortestPaths.bfs(digraph, digraph.getAdj()[i].nodeId);
