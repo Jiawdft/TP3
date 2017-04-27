@@ -2,6 +2,7 @@ package fr.isep.lab3;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Main {
@@ -20,7 +21,33 @@ public class Main {
 		Bfs runbfs = new Bfs();
 		ArrayList<Integer> listbfs = runbfs.bfs(graph, 5);
 		System.out.println("the order of the first encounter of the node 5 by bfs : " + listbfs);
-
+		
+		BFSShortestPaths runBfsShortestPaths = new BFSShortestPaths();
+		Digraph digraph = new Digraph("graph-BFS-SP.txt");
+		digraph.affichageAdj();
+		ArrayList<Integer> excentricityList = new ArrayList<Integer>();
+		for (int i = 0; i < digraph.getAdj().length; i++) {
+			System.out.println("Strating Node : " + digraph.getAdj()[i].nodeId);
+			runBfsShortestPaths.bfs(digraph, digraph.getAdj()[i].nodeId);
+			for (int j = 0; j < digraph.getAdj().length; j++) {
+				runBfsShortestPaths.printSp(j);
+			}
+			int excentricity = runBfsShortestPaths.excentricity();
+			if (excentricity != 0) {
+				excentricityList.add(excentricity);
+				System.out.println("Excentricity for the node " + digraph.getAdj()[i].nodeId + " is " + excentricity);
+			}
+			else {
+				System.out.println("The node " + digraph.getAdj()[i].nodeId + " is isolated");
+			}
+			System.out.println();
+		}
+		
+		int diameter = Collections.max(excentricityList);
+		System.out.println("The diameter of the graph is " + diameter);
+		int radius = Collections.min(excentricityList);
+		System.out.println("The radius of the graph is " + radius);
+		
 		
 		/*
 		Graph graph = new Graph("graph-DFS-BFS.txt");

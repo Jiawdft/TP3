@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 import fr.isep.lab3.Graph.Edge;
 import fr.isep.lab3.Graph.Node;
@@ -13,7 +12,7 @@ public class Bfs {
 	public ArrayList<Integer> bfs(Graph G, int startingNode){
 		ArrayList<Integer> visited = new ArrayList<Integer>();
 		Queue<Integer> queue = new LinkedList<>(); 
-		Node [] adj = G.getAdj();
+		 Node [] adj = G.getAdj();
 		int startingNodePosition = G.getNodePosition(startingNode);
 		visited.add(adj[startingNodePosition].nodeId);
 		queue.add(startingNode);
