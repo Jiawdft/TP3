@@ -5,6 +5,11 @@ public class DirectedEdge {
 	private final int w;
 	private final double weight;
 	
+	public DirectedEdge(){
+		v = 0;
+		w = 0;
+		weight = 0.0;
+	}
 	
 	public DirectedEdge(int v, int w, double weight) {
 		super();
