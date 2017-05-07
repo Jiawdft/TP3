@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import fr.isep.lab3.WDgraph.Node;
+
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
+		/*
 		Graph graph = new Graph("graph-DFS-BFS.txt");
 		Dfs rundfs = new Dfs();
 		ArrayList<Integer> listdfs = rundfs.dfs(graph, 5);
@@ -49,8 +52,25 @@ public class Main {
 		System.out.println("The diameter of the graph is " + diameter);
 		int radius = Collections.min(excentricityList);
 		System.out.println("The radius of the graph is " + radius);
+		*/
 		
-		
+		WDgraph wdGraph = new WDgraph("graph-WDG.txt");
+		wdGraph.affichageAdj();
+		DijkstraSP runDijkstrapSP = new DijkstraSP();
+		boolean isNegative = runDijkstrapSP.verifyNonNegative(wdGraph);
+		if (isNegative) {
+			System.out.println( "there are at least one negative weight in the graph. ");
+		}
+		else {
+			System.out.println("all weights in the graph are non negative.");
+		}
+		runDijkstrapSP.dijkstraSP(wdGraph, 1);
+		boolean hasPathTo = runDijkstrapSP.hasPathTo(8);
+		System.out.println("has path to v: " + hasPathTo);
+		double distTo = runDijkstrapSP.distTo(8);
+		System.out.println("Distance to v : " + distTo);
+		System.out.print("The shortest path from s to v : ");
+		runDijkstrapSP.printSP(8);
 		/*
 		Graph graph = new Graph("graph-DFS-BFS.txt");
 		graph.affichageAdj();
