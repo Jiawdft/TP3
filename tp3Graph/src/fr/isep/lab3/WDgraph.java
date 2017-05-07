@@ -118,7 +118,7 @@ public class WDgraph {
 	public void affichageAdj(){
 		System.out.println("Order : " + N);
 		System.out.println("Size : " + M);
-		System.out.println("Adjacency list :");
+		System.out.println("Adjacency list of the weighted digraph :");
 		for (int i = 0; i < adj.length; i++) {
 			System.out.print(adj[i].nodeId + ": ");
 			ArrayList<DirectedEdge> listDiEdge = adj[i].listDirectedEdge;

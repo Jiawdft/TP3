@@ -130,7 +130,7 @@ public class Digraph {
 		public void affichageAdj(){
 			System.out.println("Order : " + N);
 			System.out.println("Size : " + M);
-			System.out.println("Adjacency list of a weighted digraph :");
+			System.out.println("Adjacency list :");
 			for (int i = 0; i < adj.length; i++) {
 				System.out.print(adj[i].nodeId + ": ");
 				Edge edge = adj[i].firstEdge;
