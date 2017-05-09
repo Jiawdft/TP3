@@ -54,9 +54,12 @@ public class Main {
 		System.out.println("The radius of the graph is " + radius);
 		*/
 		
+		//Création graph à partir du fichier graph-WDG.txt
 		WDgraph wdGraph = new WDgraph("graph-WDG.txt");
+		//Affiche le graph dans le console
 		wdGraph.affichageAdj();
 		DijkstraSP runDijkstrapSP = new DijkstraSP();
+		//Vérifie le signe des weight
 		boolean isNegative = runDijkstrapSP.verifyNonNegative(wdGraph);
 		if (isNegative) {
 			System.out.println( "there are at least one negative weight in the graph. ");
@@ -64,13 +67,18 @@ public class Main {
 		else {
 			System.out.println("all weights in the graph are non negative.");
 		}
+		//Execute le dijkstra algorithm
 		runDijkstrapSP.dijkstraSP(wdGraph, 1);
+		//Vérifie s'il existe un path du noeud 1 vers le noeud 8
 		boolean hasPathTo = runDijkstrapSP.hasPathTo(8);
 		System.out.println("has path to v: " + hasPathTo);
+		//Affiche la plus petite distance entre le noeud 1 et le noeud 8
 		double distTo = runDijkstrapSP.distTo(8);
 		System.out.println("Distance to v : " + distTo);
+		//Affiche le shortest path de 1 vers 8
 		System.out.print("The shortest path from s to v : ");
 		runDijkstrapSP.printSP(8);
+		
 		/*
 		Graph graph = new Graph("graph-DFS-BFS.txt");
 		graph.affichageAdj();

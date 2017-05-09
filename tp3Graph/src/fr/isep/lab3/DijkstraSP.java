@@ -35,6 +35,16 @@ public class DijkstraSP {
 	}
 
 	public ArrayList<Integer> dijkstraSP(WDgraph G, int s){
+		
+		//le dijkstraSP fonctionne seulement avec des 
+		//weight non negative
+		//on arrete donc le programme lorsqu'on detecte
+		//des weight negative et on returne un code retour -2
+		boolean isNegative = verifyNonNegative(G);
+		if (isNegative) {
+			System.exit(-2);
+		}
+		
 		Node [] adj = G.getAdj();
 		//init des tableaux
 		nodes = new int [adj.length];
@@ -137,7 +147,7 @@ public class DijkstraSP {
 			}
 		}
 		if (vPosition == -2) {
-			System.exit(-2);
+			System.exit(-3);
 		}
 		int tempValue = v; 
 		int tempValuePosition = vPosition;
