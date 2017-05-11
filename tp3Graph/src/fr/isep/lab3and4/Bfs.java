@@ -1,12 +1,12 @@
-package fr.isep.lab3;
+package fr.isep.lab3and4;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import fr.isep.lab3.Graph.Edge;
-import fr.isep.lab3.Graph.Node;
+import fr.isep.lab3and4.Graph.Edge;
+import fr.isep.lab3and4.Graph.Node;
 
 public class Bfs {
 	

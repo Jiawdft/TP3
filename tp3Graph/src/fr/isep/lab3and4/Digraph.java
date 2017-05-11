@@ -1,4 +1,4 @@
-package fr.isep.lab3;
+package fr.isep.lab3and4;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -12,8 +12,14 @@ import java.util.List;
 public class Digraph {
 	//une class Node avec un identifiant et un element Edge
 		public class Node{
-			int nodeId;
+			private int nodeId;
 			Edge firstEdge;
+			public int getNodeId() {
+				return nodeId;
+			}
+			public void setNodeId(int nodeId) {
+				this.nodeId = nodeId;
+			}
 		}
 		//une class Edge avec un identifiant du node voisin et l'element Edge suivant 
 		public class Edge{
@@ -72,7 +78,7 @@ public class Digraph {
 			//Initialisation des nodes
 			for (int i = 0; i < nodesTab.length; i++) {
 				adj[i] = new Node();
-				adj[i].nodeId = Integer.parseInt(nodesTab[i]);
+				adj[i].setNodeId(Integer.parseInt(nodesTab[i]));
 				adj[i].firstEdge = null;
 			}
 			return N;
@@ -120,7 +126,7 @@ public class Digraph {
 		
 		public int getNodePosition(int nodeId) {
 			for (int i = 0; i < adj.length; i++) {
-				if (adj[i].nodeId == nodeId) {
+				if (adj[i].getNodeId() == nodeId) {
 					return i;
 				}
 			}
@@ -132,7 +138,7 @@ public class Digraph {
 			System.out.println("Size : " + M);
 			System.out.println("Adjacency list :");
 			for (int i = 0; i < adj.length; i++) {
-				System.out.print(adj[i].nodeId + ": ");
+				System.out.print(adj[i].getNodeId() + ": ");
 				Edge edge = adj[i].firstEdge;
 				while (edge != null) {
 					System.out.print(edge.edgeID + ", ");

@@ -1,10 +1,11 @@
-package fr.isep.lab3;
+package fr.isep.lab3and4;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
-import fr.isep.lab3.Graph.Edge;
-import fr.isep.lab3.Graph.Node;
+
+import fr.isep.lab3and4.Graph.Edge;
+import fr.isep.lab3and4.Graph.Node;
 
 public class Dfs {
 	
@@ -41,8 +42,8 @@ public class Dfs {
 					stackVoisin.pop();
 				}
 			}
-			//si le stack des voisins s'est vidé cela signefie que pour le noeud en question 
-			//tous les voisins ont déjà été visité
+			//si le stack des voisins s'est vidï¿½ cela signefie que pour le noeud en question 
+			//tous les voisins ont dï¿½jï¿½ ï¿½tï¿½ visitï¿½
 			//donc on l'enleve du stack
 			if (stackVoisin.empty()) {
 				stack.pop();

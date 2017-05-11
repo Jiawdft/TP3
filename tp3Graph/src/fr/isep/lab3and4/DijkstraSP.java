@@ -1,10 +1,10 @@
-package fr.isep.lab3;
+package fr.isep.lab3and4;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-import fr.isep.lab3.WDgraph.Node;
+import fr.isep.lab3and4.WDgraph.Node;
 
 public class DijkstraSP {
 	private int [] nodes;

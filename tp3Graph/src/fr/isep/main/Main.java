@@ -1,10 +1,21 @@
-package fr.isep.lab3;
+package fr.isep.main;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
-import fr.isep.lab3.WDgraph.Node;
+import fr.isep.lab3and4.BFSShortestPaths;
+import fr.isep.lab3and4.Bfs;
+import fr.isep.lab3and4.Dfs;
+import fr.isep.lab3and4.Digraph;
+import fr.isep.lab3and4.DijkstraSP;
+import fr.isep.lab3and4.Graph;
+import fr.isep.lab3and4.WDgraph;
+import fr.isep.lab3and4.WDgraph.Node;
+import fr.isep.lab5.Edge;
+import fr.isep.lab5.EdgeWeightedGraph;
 
 
 public class Main {
@@ -12,6 +23,24 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		
 		/*
+		
+		//------------TP3
+		Graph graph = new Graph("graph-DFS-BFS.txt");
+		graph.affichageAdj();
+		
+		System.out.println("Average degree : " + graph.averageDegree());
+		System.out.println("Minimum degree : " + graph.minimumDegree());
+		System.out.println("Maximum degree : " + graph.maximumDegree());
+		System.out.println("Edge density : " + graph.density());
+		
+		graph.neighbors(1);
+		graph.neighbors(2);
+		graph.neighbors(3);
+		graph.neighbors(4);
+		
+		
+		
+		//------------- TP4
 		Graph graph = new Graph("graph-DFS-BFS.txt");
 		Dfs rundfs = new Dfs();
 		ArrayList<Integer> listdfs = rundfs.dfs(graph, 5);
@@ -32,18 +61,18 @@ public class Main {
 		//pour chaque noeuds on realise une bfs, on affiche le shortest path vers tous les autres noeuds
 		//et on cherche son excentricity
 		for (int i = 0; i < digraph.getAdj().length; i++) {
-			System.out.println("Strating Node : " + digraph.getAdj()[i].nodeId);
-			runBfsShortestPaths.bfs(digraph, digraph.getAdj()[i].nodeId);
+			System.out.println("Strating Node : " + digraph.getAdj()[i].getNodeId());
+			runBfsShortestPaths.bfs(digraph, digraph.getAdj()[i].getNodeId());
 			for (int j = 0; j < digraph.getAdj().length; j++) {
 				runBfsShortestPaths.printSp(j);
 			}
 			int excentricity = runBfsShortestPaths.excentricity();
 			if (excentricity != 0) {
 				excentricityList.add(excentricity);
-				System.out.println("Excentricity for the node " + digraph.getAdj()[i].nodeId + " is " + excentricity);
+				System.out.println("Excentricity for the node " + digraph.getAdj()[i].getNodeId() + " is " + excentricity);
 			}
 			else {
-				System.out.println("The node " + digraph.getAdj()[i].nodeId + " is isolated");
+				System.out.println("The node " + digraph.getAdj()[i].getNodeId() + " is isolated");
 			}
 			System.out.println();
 		}
@@ -52,14 +81,14 @@ public class Main {
 		System.out.println("The diameter of the graph is " + diameter);
 		int radius = Collections.min(excentricityList);
 		System.out.println("The radius of the graph is " + radius);
-		*/
 		
-		//Création graph à partir du fichier graph-WDG.txt
+		
+		//Crï¿½ation graph ï¿½ partir du fichier graph-WDG.txt
 		WDgraph wdGraph = new WDgraph("graph-WDG.txt");
 		//Affiche le graph dans le console
 		wdGraph.affichageAdj();
 		DijkstraSP runDijkstrapSP = new DijkstraSP();
-		//Vérifie le signe des weight
+		//Vï¿½rifie le signe des weight
 		boolean isNegative = runDijkstrapSP.verifyNonNegative(wdGraph);
 		if (isNegative) {
 			System.out.println( "there are at least one negative weight in the graph. ");
@@ -69,7 +98,7 @@ public class Main {
 		}
 		//Execute le dijkstra algorithm
 		runDijkstrapSP.dijkstraSP(wdGraph, 1);
-		//Vérifie s'il existe un path du noeud 1 vers le noeud 8
+		//Vï¿½rifie s'il existe un path du noeud 1 vers le noeud 8
 		boolean hasPathTo = runDijkstrapSP.hasPathTo(8);
 		System.out.println("has path to v: " + hasPathTo);
 		//Affiche la plus petite distance entre le noeud 1 et le noeud 8
@@ -79,21 +108,17 @@ public class Main {
 		System.out.print("The shortest path from s to v : ");
 		runDijkstrapSP.printSP(8);
 		
-		/*
-		Graph graph = new Graph("graph-DFS-BFS.txt");
-		graph.affichageAdj();
-		
-		System.out.println("Average degree : " + graph.averageDegree());
-		System.out.println("Minimum degree : " + graph.minimumDegree());
-		System.out.println("Maximum degree : " + graph.maximumDegree());
-		System.out.println("Edge density : " + graph.density());
-		
-		graph.neighbors(1);
-		graph.neighbors(2);
-		graph.neighbors(3);
-		graph.neighbors(4);
 		*/
 		
+		//------------------TP5
 		
+		EdgeWeightedGraph wGraph = new EdgeWeightedGraph("WG-MST.txt");
+		wGraph.affichageAdj();
+	
+		
+		
+
 	}
 }
+
+

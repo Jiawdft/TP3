@@ -1,4 +1,4 @@
-package fr.isep.lab3;
+package fr.isep.lab3and4;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

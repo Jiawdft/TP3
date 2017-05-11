@@ -1,12 +1,12 @@
-package fr.isep.lab3;
+package fr.isep.lab3and4;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import fr.isep.lab3.Digraph.Node;
-import fr.isep.lab3.Digraph.Edge;
+import fr.isep.lab3and4.Digraph.Edge;
+import fr.isep.lab3and4.Digraph.Node;
 
 public class BFSShortestPaths {
 	private int startingNode;
@@ -45,7 +45,7 @@ public class BFSShortestPaths {
 		distance = new int [taille];
 		//initialisation des valeurs par defaut dans les tableau
 		for (int i = 0; i < taille; i++) {
-			nodes[i] = adj[i].nodeId;
+			nodes[i] = adj[i].getNodeId();
 			marked[i] = false;
 			previous[i] = -2;
 			distance[i] = Integer.MAX_VALUE;
@@ -91,7 +91,7 @@ public class BFSShortestPaths {
 	
 	public boolean hadPathTo(int v){
 		//on cherche la position du noeud v dans les tableaux 
-		//et on retourn la valeur du tableau marked à la position
+		//et on retourn la valeur du tableau marked ï¿½ la position
 		for (int i = 0; i < nodes.length; i++) {
 			if (nodes[i] == v) {
 				return marked[i];
@@ -102,7 +102,7 @@ public class BFSShortestPaths {
 	
 	public int distTo(int v){
 		//on cherche la position du noeud v dans les tableaux 
-		//et on return la valeur du tableau distance à cette position
+		//et on return la valeur du tableau distance ï¿½ cette position
 		for (int i = 0; i < nodes.length; i++) {
 			if (nodes[i] == v) {
 				return distance[i];
@@ -132,7 +132,7 @@ public class BFSShortestPaths {
 			//tant que tempPosition n'est pas le noeud root
 			//ie. distance > 0
 			while (distance[tempPosition] > 0) {
-				//on stock la valeur du tableau previous à la position tempPosition
+				//on stock la valeur du tableau previous ï¿½ la position tempPosition
 				// avec une autre valeur temporaire : tempPreviousValue
 				int tempPreviousValue = previous[tempPosition];
 				//on l'ajout dans la liste path
@@ -233,7 +233,7 @@ public class BFSShortestPaths {
 	}
 	public void displayNode (Node [] adj){
 		for (int i = 0; i < adj.length; i++) {
-			System.out.print(adj[i].nodeId + ", ");
+			System.out.print(adj[i].getNodeId() + ", ");
 		}
 		System.out.println();
 	}

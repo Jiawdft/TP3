@@ -1,4 +1,4 @@
-package fr.isep.lab3;
+package fr.isep.lab3and4;
 
 public class DirectedEdge {
 	private final int v; 
