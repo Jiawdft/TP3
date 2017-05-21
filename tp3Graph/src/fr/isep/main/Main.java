@@ -16,6 +16,8 @@ import fr.isep.lab3and4.WDgraph;
 import fr.isep.lab3and4.WDgraph.Node;
 import fr.isep.lab5.Edge;
 import fr.isep.lab5.EdgeWeightedGraph;
+import fr.isep.lab5.OptPrimMST;
+import fr.isep.lab5.PrimMST;
 
 
 public class Main {
@@ -114,10 +116,20 @@ public class Main {
 		
 		EdgeWeightedGraph wGraph = new EdgeWeightedGraph("WG-MST.txt");
 		wGraph.affichageAdj();
-	
+		PrimMST prim = new PrimMST();
+		prim.prim(wGraph, 0);
+		System.out.println("MST lengh : " + prim.getMst().size());
+		prim.edges(prim.getMst());
+		double weight = prim.weight(prim.getMst());
+		System.out.println("Weight : " +weight);
 		
-		
-
+		System.out.println();
+		System.out.println("Improved version of Prim's algo implementation : ");
+		OptPrimMST optPrim = new OptPrimMST();
+		optPrim.prim(wGraph, 0);
+		optPrim.edges(optPrim.getMst());
+		double optWeight = optPrim.weight(optPrim.getMst());
+		System.out.println(optWeight);
 	}
 }
 

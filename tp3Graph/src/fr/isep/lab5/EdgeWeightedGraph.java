@@ -11,9 +11,9 @@ import java.util.List;
 
 public class EdgeWeightedGraph {
 	// Order N du undirected weighted graph
-	private int N;
+	public int N;
 	// Size M du undirected weighted graph
-	private int M;
+	public int M;
 
 	// une class Node avec un identifiant et une liste de DirectedEdge
 	public class Node {
@@ -106,7 +106,7 @@ public class EdgeWeightedGraph {
 		// -----------------Noeud either--------------------------------------
 		// determination de la position du noeud from dans l'adj
 		// list (tab)
-		int eitherNodePosition = getNodePosition(either);
+		int eitherNodePosition = getNodePosition(either, adj);
 		// ajout de la directed edge creee dans la list des
 		// directed edge du noeud start
 		adj[eitherNodePosition].listWedge.add(wEdge);
@@ -114,13 +114,13 @@ public class EdgeWeightedGraph {
 		// -----------------Noeud other--------------------------------------
 		// determination de la position du noeud from dans l'adj
 		// list (tab)
-		int otherNodePosition = getNodePosition(other);
+		int otherNodePosition = getNodePosition(other, adj);
 		// ajout de la directed edge creee dans la list des
 		// directed edge du noeud start
 		adj[otherNodePosition].listWedge.add(wEdge);
 	}
 
-	public int getNodePosition(int nodeId) {
+	public int getNodePosition(int nodeId, Node[] adj) {
 		for (int i = 0; i < adj.length; i++) {
 			if (adj[i].nodeId == nodeId) {
 				return i;
@@ -145,5 +145,4 @@ public class EdgeWeightedGraph {
 			System.out.println();
 		}
 	}
-
 }

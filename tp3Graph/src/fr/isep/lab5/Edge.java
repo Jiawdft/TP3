@@ -24,7 +24,15 @@ public class Edge {
 		this.w = w;
 		this.weight = weight;
 	}
-	
+	public int getV() {
+		return v;
+	}
+	public int getW() {
+		return w;
+	}
+	public double getWeight() {
+		return weight;
+	}
 	
 	
 }
