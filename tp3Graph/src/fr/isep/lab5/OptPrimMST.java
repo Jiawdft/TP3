@@ -21,7 +21,6 @@ public class OptPrimMST {
 	}
 	
 	
-	// ------------------ besoin amelioration : avec previous node dans la class Vertice ----------
 	public void prim(EdgeWeightedGraph wGraph, int s) {
 		mst = new ArrayList<>();
 		//initiation priorqueue qui stock des Vertice

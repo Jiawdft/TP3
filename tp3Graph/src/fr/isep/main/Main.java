@@ -16,6 +16,7 @@ import fr.isep.lab3and4.WDgraph;
 import fr.isep.lab3and4.WDgraph.Node;
 import fr.isep.lab5.Edge;
 import fr.isep.lab5.EdgeWeightedGraph;
+import fr.isep.lab5.KruskalMST;
 import fr.isep.lab5.OptPrimMST;
 import fr.isep.lab5.PrimMST;
 
@@ -129,7 +130,15 @@ public class Main {
 		optPrim.prim(wGraph, 0);
 		optPrim.edges(optPrim.getMst());
 		double optWeight = optPrim.weight(optPrim.getMst());
-		System.out.println(optWeight);
+		System.out.println("Weight : " +optWeight);
+		
+		System.out.println();
+		System.out.println("Kruskal's algorithm :");
+		KruskalMST kruskal = new KruskalMST();
+		kruskal.kruskal(wGraph);
+		kruskal.edges(kruskal.getMst());
+		double kruskalWeight = kruskal.weight(kruskal.getMst());
+		System.out.println("Weight : " + kruskalWeight);
 	}
 }
 
